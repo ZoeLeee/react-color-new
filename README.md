@@ -21,14 +21,14 @@
 ## Installation & Usage
 
 ```sh
-npm install react-color --save
+npm install react-color-new --save
 ```
 
 ### Include the Component
 
 ```js
 import React from 'react'
-import { SketchPicker } from 'react-color'
+import { SketchPicker } from 'react-color-new'
 
 class Component extends React.Component {
 
