@@ -9,8 +9,13 @@ import SketchPresetColors from './SketchPresetColors'
 import { Dropper } from './Dropper'
 import { SketchHistoryColors } from './History'
 
-export const Sketch = ({ width, rgb, hex, hsv, hsl, onChange, onSwatchHover,
-  disableAlpha, presetColors, renderers, styles: passedStyles = {}, className = '' }) => {
+const defaultColors = ['#D0021B', '#F5A623', '#F8E71C', '#8B572A', '#7ED321', '#417505',
+  '#BD10E0', '#9013FE', '#4A90E2', '#50E3C2', '#B8E986', '#000000',
+  '#4A4A4A', '#9B9B9B', '#FFFFFF']
+
+export const Sketch = ({ width = 200, rgb, hex, hsv, hsl, onChange, onSwatchHover,
+  disableAlpha = false, presetColors = defaultColors, renderers, styles: passedStyles = {}, className = '',
+  dropper = {} }) => {
   const styles = reactCSS(merge({
     'default': {
       picker: {
@@ -120,7 +125,7 @@ export const Sketch = ({ width, rgb, hex, hsv, hsl, onChange, onSwatchHover,
           <Checkboard />
           <div style={styles.activeColor} />
         </div>
-        <Dropper onChange={onChange} hex={hex} />
+        <Dropper onChange={onChange} hex={hex} dropper={dropper} />
       </div>
 
       <SketchFields
@@ -148,15 +153,6 @@ Sketch.propTypes = {
   disableAlpha: PropTypes.bool,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   styles: PropTypes.object,
-}
-
-Sketch.defaultProps = {
-  disableAlpha: false,
-  width: 200,
-  styles: {},
-  presetColors: ['#D0021B', '#F5A623', '#F8E71C', '#8B572A', '#7ED321', '#417505',
-    '#BD10E0', '#9013FE', '#4A90E2', '#50E3C2', '#B8E986', '#000000',
-    '#4A4A4A', '#9B9B9B', '#FFFFFF'],
 }
 
 export default ColorWrap(Sketch)

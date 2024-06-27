@@ -1,10 +1,12 @@
 import React from 'react'
 import { DropSVG } from './svg'
 import reactCSS from 'reactcss'
+import { ColorDropper } from '../../helpers/color-dropper/ColorDropper'
 
 export const Dropper = ({
     hex,
-    onChange
+    onChange,
+    dropper = {}
 }) => {
 
     const styles = reactCSS({
@@ -22,24 +24,21 @@ export const Dropper = ({
     })
 
     const getColorByTool = () => {
-        const eyeDropper = new window.EyeDropper();
-        const abortController = new AbortController();
-
-        eyeDropper
-            .open({ signal: abortController.signal })
-            .then((result) => {
-                const color = result.sRGBHex;
-                onChange({ hex: color, source: 'hex' });
-            })
-            .catch((e) => {
-                console.error("e: ", e);
-            });
-    }
-
-
-    if (!window.EyeDropper) {
-        console.warn("浏览器不支持");
-        return null
+        const pipette = new ColorDropper({
+            scale: 2,
+            useMagnifier: true,
+            listener: {
+                onOk: ({ color }) => {
+                    onChange({ hex: color, source: 'hex' });
+                },
+            },
+            ...dropper
+        });
+        if (window.EyeDropper) {
+            pipette.start()
+        } else {
+            setTimeout(() => pipette.start(), 100);
+        }
     }
 
     return <div style={styles.dropper} onClick={getColorByTool}>
