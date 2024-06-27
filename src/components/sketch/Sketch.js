@@ -6,6 +6,7 @@ import merge from 'lodash/merge'
 import { ColorWrap, Saturation, Hue, Alpha, Checkboard } from '../common'
 import SketchFields from './SketchFields'
 import SketchPresetColors from './SketchPresetColors'
+import { Dropper } from './Dropper'
 
 export const Sketch = ({ width, rgb, hex, hsv, hsl, onChange, onSwatchHover,
   disableAlpha, presetColors, renderers, styles: passedStyles = {}, className = '' }) => {
@@ -118,6 +119,7 @@ export const Sketch = ({ width, rgb, hex, hsv, hsl, onChange, onSwatchHover,
           <Checkboard />
           <div style={ styles.activeColor } />
         </div>
+        <Dropper onChange={ onChange } hex={ hex } />
       </div>
 
       <SketchFields
