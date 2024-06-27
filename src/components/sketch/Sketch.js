@@ -7,6 +7,7 @@ import { ColorWrap, Saturation, Hue, Alpha, Checkboard } from '../common'
 import SketchFields from './SketchFields'
 import SketchPresetColors from './SketchPresetColors'
 import { Dropper } from './Dropper'
+import { SketchHistoryColors } from './History'
 
 export const Sketch = ({ width, rgb, hex, hsv, hsl, onChange, onSwatchHover,
   disableAlpha, presetColors, renderers, styles: passedStyles = {}, className = '' }) => {
@@ -48,7 +49,7 @@ export const Sketch = ({ width, rgb, hex, hsv, hsl, onChange, onSwatchHover,
       activeColor: {
         absolute: '0px 0px 0px 0px',
         borderRadius: '2px',
-        background: `rgba(${ rgb.r },${ rgb.g },${ rgb.b },${ rgb.a })`,
+        background: `rgba(${rgb.r},${rgb.g},${rgb.b},${rgb.a})`,
         boxShadow: 'inset 0 0 0 1px rgba(0,0,0,.15), inset 0 0 4px rgba(0,0,0,.25)',
       },
       hue: {
@@ -87,52 +88,57 @@ export const Sketch = ({ width, rgb, hex, hsv, hsl, onChange, onSwatchHover,
   }, passedStyles), { disableAlpha })
 
   return (
-    <div style={ styles.picker } className={ `sketch-picker ${ className }` }>
-      <div style={ styles.saturation }>
+    <div style={styles.picker} className={`sketch-picker ${className}`}>
+      <div style={styles.saturation}>
         <Saturation
-          style={ styles.Saturation }
-          hsl={ hsl }
-          hsv={ hsv }
-          onChange={ onChange }
+          style={styles.Saturation}
+          hsl={hsl}
+          hsv={hsv}
+          onChange={onChange}
         />
       </div>
-      <div style={ styles.controls } className="flexbox-fix">
-        <div style={ styles.sliders }>
-          <div style={ styles.hue }>
+      <div style={styles.controls} className="flexbox-fix">
+        <div style={styles.sliders}>
+          <div style={styles.hue}>
             <Hue
-              style={ styles.Hue }
-              hsl={ hsl }
-              onChange={ onChange }
+              style={styles.Hue}
+              hsl={hsl}
+              onChange={onChange}
             />
           </div>
-          <div style={ styles.alpha }>
+          <div style={styles.alpha}>
             <Alpha
-              style={ styles.Alpha }
-              rgb={ rgb }
-              hsl={ hsl }
-              renderers={ renderers }
-              onChange={ onChange }
+              style={styles.Alpha}
+              rgb={rgb}
+              hsl={hsl}
+              renderers={renderers}
+              onChange={onChange}
             />
           </div>
         </div>
-        <div style={ styles.color }>
+        <div style={styles.color}>
           <Checkboard />
-          <div style={ styles.activeColor } />
+          <div style={styles.activeColor} />
         </div>
-        <Dropper onChange={ onChange } hex={ hex } />
+        <Dropper onChange={onChange} hex={hex} />
       </div>
 
       <SketchFields
-        rgb={ rgb }
-        hsl={ hsl }
-        hex={ hex }
-        onChange={ onChange }
-        disableAlpha={ disableAlpha }
+        rgb={rgb}
+        hsl={hsl}
+        hex={hex}
+        onChange={onChange}
+        disableAlpha={disableAlpha}
       />
       <SketchPresetColors
-        colors={ presetColors }
-        onClick={ onChange }
-        onSwatchHover={ onSwatchHover }
+        colors={presetColors}
+        onClick={onChange}
+        onSwatchHover={onSwatchHover}
+      />
+      <SketchHistoryColors
+        hex={hex}
+        onClick={onChange}
+        onSwatchHover={onSwatchHover}
       />
     </div>
   )
