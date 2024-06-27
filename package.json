@@ -105,7 +105,8 @@
   },
   "files": [
     "lib",
-    "es"
+    "es",
+    "types.d.ts"
   ],
   "jest": {
     "rootDir": "src",
