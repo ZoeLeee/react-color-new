@@ -1,9 +1,10 @@
 {
   "name": "react-color-new",
-  "version": "2.20.9",
+  "version": "2.20.10",
   "description": "A Collection of Color Pickers from Sketch, Photoshop, Chrome & more",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "types": "types.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ZoeLeee/react-color-new.git"
