@@ -5,6 +5,7 @@ import { Swatch } from '../common';
 const key = "REACT_COLOR_HISTORYS";
 
 export class SketchHistoryColors extends (PureComponent || Component) {
+    isChange = false
     constructor(props) {
         super(props)
         this.state = {
@@ -23,18 +24,24 @@ export class SketchHistoryColors extends (PureComponent || Component) {
 
     componentDidMount() {
         const list = JSON.parse(localStorage.getItem(key) || '[]') || []
-        this.setState({ history: list.filter(item => !!item) })
+        this.setState({ history: list })
+    }
+
+    componentDidUpdate(prevProps) {
+        if (!this.props.hex || this.props.hex === prevProps.hex) return;
+        this.isChange = true;
     }
 
     componentWillUnmount() {
-        if (!this.props.hex) return;
+        if (!this.props.hex || this.props.hex === this.state.history[0]) return;
+        if (!this.isChange) return;
         const list = [this.props.hex, ...this.state.history].slice(0, 16);
         localStorage.setItem(key, JSON.stringify(list));
     }
 
     render() {
         const colors = this.state.history;
-    
+
         const styles = reactCSS({
             'default': {
                 colors: {
@@ -64,7 +71,7 @@ export class SketchHistoryColors extends (PureComponent || Component) {
             'no-presets': !colors || !colors.length,
         })
         return <div style={styles.colors} className="flexbox-fix">
-            {colors.map((colorObjOrString,index) => {
+            {colors.map((colorObjOrString, index) => {
                 const c = typeof colorObjOrString === 'string'
                     ? { color: colorObjOrString }
                     : colorObjOrString
