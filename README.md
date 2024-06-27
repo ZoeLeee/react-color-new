@@ -11,6 +11,9 @@
 
 ## Demo
 
+![image](https://github.com/ZoeLeee/react-color-new/assets/33168975/5095cf03-f0d2-46f1-9911-1b56d963540b)
+
+
 ![Demo](https://media.giphy.com/media/26FfggT53qE304CwE/giphy.gif)
 
 [**Live Demo**](http://casesandberg.github.io/react-color/)
