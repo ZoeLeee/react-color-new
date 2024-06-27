@@ -9,8 +9,6 @@ import SketchPresetColors from './SketchPresetColors'
 import { Dropper } from './Dropper'
 import { SketchHistoryColors } from './History'
 
-console.info("react-color-new 2.20.2")
-
 export const Sketch = ({ width, rgb, hex, hsv, hsl, onChange, onSwatchHover,
   disableAlpha, presetColors, renderers, styles: passedStyles = {}, className = '' }) => {
   const styles = reactCSS(merge({
