@@ -17,6 +17,12 @@ export class ColorDropper {
         this.tooltipVisible = true;
         this.useMagnifier = false;
         this.eyeDropper = null;
+
+        
+        if(props.getDropper){
+            props.getDropper(this)
+        }
+
         /**
          * 处理鼠标移动
          */
@@ -139,12 +145,9 @@ export class ColorDropper {
         try {
             this.drawCanvas().then(res => {
                 document.body.appendChild(this.canvas);
-                const tooltip = drawTooltip('按Esc可退出');
-                document.body.appendChild(tooltip);
-                setTimeout(() => {
-                    if (tooltip && tooltip.parentNode)
-                        tooltip.parentNode.removeChild(tooltip)
-                }, 2000);
+
+                this.canvas.style.outline="2px dashed #ccc";
+       
                 // 添加监听
                 this.canvas.addEventListener('mousemove', this.handleMove);
                 this.canvas.addEventListener('mousedown', this.handleDown);
