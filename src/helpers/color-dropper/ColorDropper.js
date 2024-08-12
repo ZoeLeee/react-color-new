@@ -166,10 +166,13 @@ export class ColorDropper {
      * 结束销毁dom，清除事件监听
      */
     destroy() {
-        this.canvas.removeEventListener('mousemove', this.handleMove);
-        this.canvas.removeEventListener('mousedown', this.handleDown);
-        this.canvas.removeEventListener('mouseenter', this.handleEnter);
-        this.canvas.removeEventListener('mouseout', this.handleOut);
+        if( this.canvas){
+            this.canvas.removeEventListener('mousemove', this.handleMove);
+            this.canvas.removeEventListener('mousedown', this.handleDown);
+            this.canvas.removeEventListener('mouseenter', this.handleEnter);
+            this.canvas.removeEventListener('mouseout', this.handleOut);
+        }
+    
         document.removeEventListener('keydown', this.handleKeyDown);
         if (this.canvas && this.canvas.parentNode)
             this.canvas.parentNode.removeChild(this.canvas);

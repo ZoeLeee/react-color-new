@@ -30,6 +30,7 @@ export const Dropper = ({
             listener: {
                 onOk: ({ color }) => {
                     onChange({ hex: color, source: 'hex' });
+                    pipette.destroy()
                 },
             },
             ...dropper
